@@ -1,13 +1,13 @@
 import { TaskProvider } from './context/TaskContext';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
     <TaskProvider>
-      <div>
-        <h1 style={{ padding: '2rem', color: 'var(--text-primary)' }}>
-          待办事项 App - Context 已接入
-        </h1>
-      </div>
+      <Navbar />
+      <main style={{ padding: '1rem' }}>
+        <p style={{ color: 'var(--text-secondary)' }}>看板区域即将到来...</p>
+      </main>
     </TaskProvider>
   );
 }
