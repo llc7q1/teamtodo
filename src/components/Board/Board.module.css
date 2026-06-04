@@ -1,0 +1,20 @@
+.board {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  overflow-x: auto;
+  min-height: calc(100vh - 56px);
+  align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  .board {
+    scroll-snap-type: x mandatory;
+    padding: 1rem;
+  }
+
+  .board > * {
+    scroll-snap-align: center;
+    min-width: 85vw;
+  }
+}
