@@ -1,17 +1,22 @@
 .addButton {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.625rem;
   background: transparent;
-  border: 1px dashed var(--text-secondary);
+  border: 1px dashed var(--text-dim);
   border-radius: var(--border-radius);
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  transition: border-color 0.2s, color 0.2s;
+  color: var(--text-dim);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all var(--transition);
 }
 
 .addButton:hover {
   border-color: var(--accent);
   color: var(--accent);
+  background: var(--accent-subtle);
+  box-shadow: 0 0 16px var(--accent-glow);
 }
 
 .form {
@@ -22,36 +27,43 @@
 .input {
   flex: 1;
   padding: 0.5rem 0.75rem;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--text-secondary);
-  background: var(--bg-main);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
   color: var(--text-primary);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .input:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
 }
 
 .submitButton {
-  padding: 0.5rem 0.75rem;
-  background: var(--accent);
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, var(--accent), #9c6cff);
   color: white;
-  border-radius: var(--border-radius);
-  font-size: 0.875rem;
+  border-radius: var(--border-radius-sm);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: all var(--transition);
 }
 
 .submitButton:hover {
-  opacity: 0.9;
+  box-shadow: 0 0 16px var(--accent-glow);
+  transform: translateY(-1px);
 }
 
 .cancelButton {
   padding: 0.5rem 0.75rem;
   background: transparent;
   color: var(--text-secondary);
-  border-radius: var(--border-radius);
-  font-size: 0.875rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.8125rem;
+  transition: color var(--transition);
 }
 
 .cancelButton:hover {
