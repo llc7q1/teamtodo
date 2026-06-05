@@ -9,6 +9,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(title="TeamTodo API")
 
 allowed_origins = os.environ.get("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+allowed_origins.append("https://teamtodo-omega.vercel.app")
 
 app.add_middleware(
     CORSMiddleware,
