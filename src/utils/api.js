@@ -1,7 +1,7 @@
 // src/utils/api.js
 import { getToken, removeToken } from './storage';
 
-const BASE_URL = import.meta.env.VITE_API_URL || '/api';
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://teamtodo-api-production.up.railway.app/api';
 
 async function request(path, options = {}) {
   const token = getToken();
