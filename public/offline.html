@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeamTodo - 离线</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: #0c0e1a;
+      color: #eaf0ff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Atmospheric background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 20%, rgba(124, 77, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 80%, rgba(0, 229, 255, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124, 77, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 77, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      max-width: 420px;
+    }
+
+    /* Signal icon - broken wifi */
+    .signal-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+
+    .signal-ring {
+      position: absolute;
+      border: 3px solid rgba(124, 77, 255, 0.25);
+      border-radius: 50%;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .signal-ring:nth-child(1) {
+      width: 120px; height: 120px;
+      top: 0; left: 0;
+      animation-delay: 0s;
+    }
+
+    .signal-ring:nth-child(2) {
+      width: 88px; height: 88px;
+      top: 16px; left: 16px;
+      animation-delay: 0.4s;
+    }
+
+    .signal-ring:nth-child(3) {
+      width: 56px; height: 56px;
+      top: 32px; left: 32px;
+      animation-delay: 0.8s;
+    }
+
+    .signal-dot {
+      position: absolute;
+      width: 16px; height: 16px;
+      background: linear-gradient(135deg, #7c4dff, #00e5ff);
+      border-radius: 50%;
+      top: 52px; left: 52px;
+      box-shadow: 0 0 20px rgba(124, 77, 255, 0.5);
+    }
+
+    /* Slash line across */
+    .signal-slash {
+      position: absolute;
+      width: 140px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #ff4c6a, transparent);
+      top: 58px;
+      left: -10px;
+      transform: rotate(-45deg);
+      box-shadow: 0 0 12px rgba(255, 76, 106, 0.4);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.05); }
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #7c4dff, #00e5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #6b7394;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .retry-btn {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      padding: 0.875rem 2.5rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c4dff, #6b3fe6);
+      color: white;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(124, 77, 255, 0.3);
+    }
+
+    .retry-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(124, 77, 255, 0.45);
+    }
+
+    .retry-btn:active {
+      transform: translateY(0);
+    }
+
+    .logo-text {
+      margin-top: 3rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: #3d4566;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="signal-icon">
+      <div class="signal-ring"></div>
+      <div class="signal-ring"></div>
+      <div class="signal-ring"></div>
+      <div class="signal-dot"></div>
+      <div class="signal-slash"></div>
+    </div>
+
+    <h1>信号丢失</h1>
+    <p>暂时无法连接到服务器。<br/>请检查网络连接后重试。</p>
+
+    <button class="retry-btn" onclick="window.location.reload()">
+      重新连接
+    </button>
+
+    <div class="logo-text">TEAMTODO</div>
+  </div>
+</body>
+</html>

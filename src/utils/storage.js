@@ -1,11 +1,14 @@
 // src/utils/storage.js
-const STORAGE_KEY = 'todo-app-tasks';
+const TOKEN_KEY = 'teamtodo-token';
 
-export function loadTasks() {
-  const data = localStorage.getItem(STORAGE_KEY);
-  return data ? JSON.parse(data) : null;
+export function getToken() {
+  return localStorage.getItem(TOKEN_KEY);
 }
 
-export function saveTasks(tasks) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+export function saveToken(token) {
+  localStorage.setItem(TOKEN_KEY, token);
+}
+
+export function removeToken() {
+  localStorage.removeItem(TOKEN_KEY);
 }

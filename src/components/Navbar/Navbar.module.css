@@ -118,3 +118,38 @@
   border-color: var(--accent);
   box-shadow: 0 0 12px var(--accent-glow);
 }
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.userName {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.logoutButton {
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  padding: 0.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  color: var(--priority-high);
+  border-color: rgba(255, 76, 106, 0.3);
+  background: var(--priority-high-glow);
+}

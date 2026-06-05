@@ -1,3 +1,4 @@
+// src/components/TaskCard/TaskCard.jsx
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { PRIORITY_LABELS, PRIORITY_COLORS } from '../../data/constants';
@@ -5,7 +6,7 @@ import { useTaskContext } from '../../context/TaskContext';
 import styles from './TaskCard.module.css';
 
 export default function TaskCard({ task }) {
-  const { users, setSelectedTaskId } = useTaskContext();
+  const { setSelectedTaskId } = useTaskContext();
 
   const {
     attributes,
@@ -21,10 +22,8 @@ export default function TaskCard({ task }) {
     transition,
   };
 
-  const assignee = users.find((u) => u.id === task.assignee);
-
   const isOverdue =
-    task.dueDate && new Date(task.dueDate) < new Date() && task.status !== 'done';
+    task.due_date && new Date(task.due_date) < new Date() && task.status !== 'done';
 
   const formatDate = (dateStr) => {
     if (!dateStr) return '';
@@ -55,18 +54,18 @@ export default function TaskCard({ task }) {
 
       <div className={styles.footer}>
         <div className={styles.assignee}>
-          {assignee && (
+          {task.assignee_name && (
             <>
               <span className={styles.assigneeAvatar}>
-                {assignee.name.charAt(0)}
+                {task.assignee_name.charAt(0)}
               </span>
-              {assignee.name}
+              {task.assignee_name}
             </>
           )}
         </div>
-        {task.dueDate && (
+        {task.due_date && (
           <span className={`${styles.dueDate} ${isOverdue ? styles.overdue : ''}`}>
-            📅 {formatDate(task.dueDate)}
+            📅 {formatDate(task.due_date)}
           </span>
         )}
       </div>

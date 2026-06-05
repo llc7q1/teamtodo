@@ -1,3 +1,4 @@
+// src/components/TaskDetailPanel/TaskDetailPanel.jsx
 import { useState, useEffect } from 'react';
 import { useTaskContext } from '../../context/TaskContext';
 import { STATUS_LABELS, PRIORITY_LABELS, STATUSES, PRIORITIES } from '../../data/constants';
@@ -9,9 +10,9 @@ export default function TaskDetailPanel() {
   const [form, setForm] = useState({
     title: '',
     status: STATUSES.TODO,
-    assignee: '',
+    assignee_id: null,
     priority: PRIORITIES.MEDIUM,
-    dueDate: '',
+    due_date: '',
     description: '',
   });
 
@@ -20,9 +21,9 @@ export default function TaskDetailPanel() {
       setForm({
         title: selectedTask.title,
         status: selectedTask.status,
-        assignee: selectedTask.assignee,
+        assignee_id: selectedTask.assignee_id,
         priority: selectedTask.priority,
-        dueDate: selectedTask.dueDate,
+        due_date: selectedTask.due_date || '',
         description: selectedTask.description,
       });
     }
@@ -31,17 +32,21 @@ export default function TaskDetailPanel() {
   if (!selectedTask) return null;
 
   const handleChange = (field) => (e) => {
-    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    let value = e.target.value;
+    if (field === 'assignee_id') {
+      value = value === '' ? null : Number(value);
+    }
+    setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSave = () => {
-    updateTask(selectedTask.id, form);
+  const handleSave = async () => {
+    await updateTask(selectedTask.id, form);
     setSelectedTaskId(null);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm('确定要删除这个任务吗？')) {
-      deleteTask(selectedTask.id);
+      await deleteTask(selectedTask.id);
     }
   };
 
@@ -71,10 +76,14 @@ export default function TaskDetailPanel() {
 
         <div className={styles.fieldGroup}>
           <label className={styles.label}>指派人</label>
-          <select className={styles.select} value={form.assignee} onChange={handleChange('assignee')}>
+          <select
+            className={styles.select}
+            value={form.assignee_id ?? ''}
+            onChange={handleChange('assignee_id')}
+          >
             <option value="">未指派</option>
             {users.map((user) => (
-              <option key={user.id} value={user.id}>{user.name}</option>
+              <option key={user.id} value={user.id}>{user.display_name}</option>
             ))}
           </select>
         </div>
@@ -93,8 +102,8 @@ export default function TaskDetailPanel() {
           <input
             type="date"
             className={styles.dateInput}
-            value={form.dueDate}
-            onChange={handleChange('dueDate')}
+            value={form.due_date}
+            onChange={handleChange('due_date')}
           />
         </div>
 

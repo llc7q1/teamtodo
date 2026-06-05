@@ -1,6 +1,10 @@
+// src/components/Navbar/Navbar.jsx
+import { useAuth } from '../../context/AuthContext';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
+  const { user, logout } = useAuth();
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
@@ -19,7 +23,15 @@ export default function Navbar() {
         <button className={styles.iconButton} title="通知">
           &#128276;
         </button>
-        <div className={styles.avatar}>我</div>
+        <div className={styles.userInfo}>
+          <div className={styles.avatar}>
+            {user?.display_name?.charAt(0) || '我'}
+          </div>
+          <span className={styles.userName}>{user?.display_name || ''}</span>
+        </div>
+        <button className={styles.logoutButton} onClick={logout} title="登出">
+          &#10151;
+        </button>
       </div>
     </nav>
   );
