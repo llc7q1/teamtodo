@@ -82,3 +82,11 @@
   box-shadow: inset 0 0 30px var(--accent-glow);
   border-radius: var(--border-radius);
 }
+
+/* ========== MOBILE ========== */
+@media (max-width: 480px) {
+  .column {
+    min-width: 85vw;
+    max-width: 90vw;
+  }
+}

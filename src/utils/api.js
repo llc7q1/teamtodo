@@ -20,9 +20,14 @@ async function request(path, options = {}) {
   });
 
   if (response.status === 401) {
-    removeToken();
-    window.location.reload();
-    return;
+    const error = await response.json().catch(() => ({}));
+    // Only auto-logout for authenticated requests, not login/register
+    if (path !== '/login' && path !== '/register') {
+      removeToken();
+      window.location.reload();
+      return;
+    }
+    throw new Error(error.detail || '认证失败');
   }
 
   if (!response.ok) {
